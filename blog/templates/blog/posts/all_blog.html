@@ -1,0 +1,17 @@
+{% extends 'blog/base.html' %}
+{% block title %}All Blogs {%endblock%}
+
+{% block content %}
+
+<div class="panel panel-default">
+        {% for blog in blogs %}
+        <div class="panel-heading">
+            <a href="/blog/{{blog.slug}}">{{blog.title}}</a> 
+        </div>
+        <div class="panel-body">{{blog.content}}</div>
+        {%endfor%}
+</div>
+
+
+
+{% endblock %}

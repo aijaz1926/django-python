@@ -1,0 +1,10 @@
+{% extends 'blog/base.html' %}
+{% block title %} {{blog.title}} {%endblock%}
+
+{% block content %}
+    <h3>{{ blog.title }}</h3>
+    <small>create by {{blog.user}} on {{blog.created_on}}</small>
+    <hr/>
+    <p>{{blog.content}}</p>
+    
+{% endblock %}
