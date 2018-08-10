@@ -1,0 +1,6 @@
+manage.py
+blog/migrations/**
+blog/__pycache__/**
+djangoproject/__pycache__/**
+.vscode
+
