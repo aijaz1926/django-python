@@ -17,20 +17,18 @@
         <nav class="navbar navbar-inverse">
                 <div class="container-fluid">
                   <div class="navbar-header">
-                    <a class="navbar-brand" href="#">WebSiteName</a>
+                    <span class="navbar-brand active" href="#">Aijaz's Blog</span>
                   </div>
                   <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">Home</a></li>
-                    <li><a href="#">Page 1</a></li>
-                    <li><a href="#">Page 2</a></li>
+                    <li class="active"><a href="/blog/">Home</a></li>
                   </ul>
                   <ul class="nav navbar-nav navbar-right">
                     {% if user.username %}
                       <li><a href="#"><span class="glyphicon glyphicon-user"></span> Welcome! {{user.username}}</a></li>
-                      <li><a href="#"><span class="glyphicon glyphicon-user"></span>Logout</a></li>
+                      <li><a href="/admin/logout?next={{request.path}}"><span class="glyphicon glyphicon-user"></span>Logout</a></li>
                     {% else %} 
                       <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-                      <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                      <li><a href="/admin/login?next={{request.path}}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
                     {% endif %}
                   </ul>
                 </div>
@@ -42,15 +40,16 @@
                   {% block content %} {% endblock %}
                </div>
                <div class="col-sm-4">
-                  <h3 style='margin-top:0px'> Categories</h3>
-                  {% for category in categories %}
-                    <p>{{category.name}}</p>
-                  
-                  {% empty %}
-                    <p> No Categories Found </p>  
-                  {% endfor %}
-
-               </div>
+                {% block rightcontent %}
+                    <h3 style='margin-top:0px'> Categories</h3>
+                    {% for category in categories %}
+                      <p><a href="{{ category.get_absolute_url }}">{{category.name}}</a></p>
+                    
+                    {% empty %}
+                      <p> No Categories Found </p>  
+                    {% endfor %}
+                {% endblock %}
+              </div>
           </div>
         </div>
     </main>

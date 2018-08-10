@@ -2,16 +2,15 @@
 {% block title %}All Blogs {%endblock%}
 
 {% block content %}
-
+<p>Blogs in {{category}} Category({{blogs|length}})</p>
 <div class="panel panel-default">
         {% for blog in blogs %}
         <div class="panel-heading">
             <a href="/blog/{{blog.slug}}">{{blog.title}}</a> 
         </div>
-        <div class="panel-body">{{blog.content}}</div>
+        <div class="panel-body">{{blog.content|truncatechars:70}}</div>
+        {% empty %}
+            <p class="error red">No Blogs Found</p>
         {%endfor%}
 </div>
-
-
-
 {% endblock %}

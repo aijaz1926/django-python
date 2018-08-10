@@ -1,0 +1,25 @@
+{% extends 'blog/base.html' %}
+{% block title %} {{blog.title}} {%endblock%}
+
+{% block content %}
+    <h3>{{ blog.title }}</h3>
+    <small>create by {{blog.user}} on {{blog.created_on}}</small>
+    <hr/>
+    <p>{{blog.content}}</p>
+
+<h3 style="display:inline-block">Comments</h3> 
+
+<a href="{% url 'blog:add_comment' blog.slug %}"> Leave a Comment</a>
+
+<div class="panel panel-default">
+    {% for comment in comments %}
+        {% if comment.approved or comment.user == request.user%}
+            <div class="panel-heading">
+                {% if comment.anonymous %} <i>Anonymous</i> {% else %} {{comment.user}} {%endif%}:  {{comment.created_at}}
+            </div>
+            <div class="panel-body">{{comment.comment}}</div>
+        {%endif%}
+    {%endfor%}
+</div>
+
+{% endblock %}
