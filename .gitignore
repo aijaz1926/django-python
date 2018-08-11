@@ -4,3 +4,7 @@ blog/__pycache__/**
 djangoproject/__pycache__/**
 .vscode
 
+accounts/__pycache__/**
+accounts/migrations/**
+blog/middleware/__pycache__/**
+

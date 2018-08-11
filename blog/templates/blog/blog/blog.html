@@ -1,4 +1,6 @@
 {% extends 'blog/base.html' %}
+{% load tz %}
+{% get_current_timezone as TIME_ZONE %}
 {% block title %} {{blog.title}} {%endblock%}
 
 {% block content %}
@@ -15,7 +17,8 @@
     {% for comment in comments %}
         {% if comment.approved or comment.user == request.user%}
             <div class="panel-heading">
-                {% if comment.anonymous %} <i>Anonymous</i> {% else %} {{comment.user}} {%endif%}:  {{comment.created_at}}
+                {% if comment.anonymous %} <i>Anonymous</i> {% else %} {{comment.user}} {%endif%}: 
+                 {{ comment.created_at|localtime }}
             </div>
             <div class="panel-body">{{comment.comment}}</div>
         {%endif%}

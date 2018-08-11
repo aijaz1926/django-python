@@ -2,6 +2,7 @@ from django.shortcuts import render,get_object_or_404,reverse
 from django.http import HttpResponse,HttpResponseRedirect,HttpResponseForbidden
 from .forms import CommentForm
 from .models import Blog,Comment,Category
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def get_all_blog(request):
@@ -15,6 +16,7 @@ def get_all_blog(request):
     }
     return render(request, template_url, context)
 
+@login_required
 def get_blog(request, slug):
     blog = get_object_or_404(Blog,slug=slug)
     categories = Category.objects.all()
@@ -27,7 +29,6 @@ def get_blog(request, slug):
     return render(request, template_url, context)
 
 def get_blog_by_category(request, category):
-    print(category)
     oCategory = get_object_or_404(Category,name=category)
     blogs = Blog.objects.filter(category=oCategory)
     categories = Category.objects.all()
