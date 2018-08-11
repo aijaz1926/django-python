@@ -17,4 +17,8 @@ urlpatterns = [
         template_name = 'accounts/logout.html',
         redirect_field_name = next
     ), name="logout"),
+
+    # url(r'', auth_views.AuthenticationForm.UserCreationForm.as_view(
+    #     template_name = 'accounts/signup.html'
+    # ), name='signup')
 ]
