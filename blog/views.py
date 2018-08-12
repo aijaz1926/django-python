@@ -16,7 +16,7 @@ def get_all_blog(request):
     }
     return render(request, template_url, context)
 
-@login_required
+#@login_required
 def get_blog(request, slug):
     blog = get_object_or_404(Blog,slug=slug)
     categories = Category.objects.all()

@@ -50,7 +50,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'blog.middleware.logger.MyLogger',
+    'blog.middleware.blog.LoggerMiddleware',
+    'blog.middleware.blog.AuthMiddleware'
 ]
 
 ROOT_URLCONF = 'djangoproject.urls'
@@ -131,3 +132,43 @@ STATICFILES_DIRS=(os.path.join(BASE_DIR,'static'),)
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
 LOGIN_REDIRECT_URL='/blog/'
+
+AUTH_EXCLUDED_URL = (
+    '/accounts/login/',
+    '/accounts/logout/'
+)
+
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        # 'file': {
+        #     'level': 'DEBUG',
+        #     'class': 'logging.FileHandler',
+        #     'filename': BASE_DIR + '/debug.log',
+        # },
+        'console' : {
+            'level' : 'DEBUG',
+            'class' : 'logging.StreamHandler',
+            'formatter': 'verbose'
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+            'level': 'INFO',
+            'propagate': True,
+        },
+    },
+    'formatters': {
+        'verbose': {
+            'format': '{levelname} {asctime} {module} {process:d} {thread:d} {message}',
+            'style': '{',
+        },
+        'simple': {
+            'format': '{levelname} {message}',
+            'style': '{',
+        },
+    },    
+}
